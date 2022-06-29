@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-row bg-gray-100 text-gray-800">
+  <div class="flex bg-gray-100 text-gray-800">
     <aside
-      class="h-screen sticky w-64 top-0 md:shadow transform -translate-x-full md:translate-x-0 transition-transform duration-150 ease-in bg-gray-400"
+      class="h-screen flex-none sticky w-64 top-0 md:shadow transform -translate-x-full md:translate-x-0 transition-transform duration-150 ease-in bg-gray-400"
     >
       <div class="flex items-center py-4">
         <div class="inline-flex">
@@ -49,7 +49,7 @@
     <main
       class="main flex flex-col flex-grow md:ml-0 transition-all duration-150 ease-in"
     >
-      <div class="p-4">
+      <div class="p-5">
         <Nuxt />
       </div>
       <footer class="footer px-4 py-6">

@@ -1,5 +1,5 @@
 <template>
-  <div class="p-2">
+  <div>
     <h2 class="text-lg">Popular News</h2>
     <div class="flex flex-row grid grid-cols-4">
       <news-card v-for="i in 4" :key="i" :route="`articles/${i}`"></news-card>

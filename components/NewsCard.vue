@@ -5,7 +5,7 @@
   >
     <img
       class="object-cover min-w-full h-36 rounded-lg"
-      src="~/static/img/animal.jpg"
+      src="~/assets/img/animal.jpg"
       alt=""
     />
     <div class="flex flex-col justify-between pt-2 leading-normal">
@@ -13,11 +13,13 @@
         Noteworthy technology acquisitions 2021
       </h5>
 
-      <rounded-profile> </rounded-profile>
+      <div class="flex justify-between">
+        <rounded-profile> </rounded-profile>
 
-      <div class="text-gray-400 text-sm text-right">
-        <div class="justify-between">254 Views</div>
-        <h4>23 July, 2022</h4>
+        <div class="text-gray-400 justify-end text-sm text-right mt-1">
+          <div class="justify-between">254 Views</div>
+          <h4>23 July, 2022</h4>
+        </div>
       </div>
     </div>
   </NuxtLink>
