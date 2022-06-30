@@ -1,31 +1,26 @@
 <template>
   <div class="grid grid-cols-3 gap-4">
-    <div class="col-span-2">
+    <div class="col-span-2" v-if="article">
       <img
         class="rounded-lg w-full h-56 object-cover"
-        src="~/assets/img/animal.jpg"
-        alt=""
+        :src="article.image.default"
+        alt="Article Image"
       />
       <h2 class="text-xl py-3">
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry.
+        {{ article.title }}
       </h2>
       <div class="flex flex-row justify-start">
-        <rounded-profile></rounded-profile>
-        <div class="ml-2 text-gray-400 text-sm mt-4">254 Views</div>
-        <h4 class="ml-2 text-gray-400 text-sm mt-4">23 July, 2022</h4>
+        <rounded-profile :author="article.author" />
+        <div class="ml-2 text-gray-400 text-sm mt-4">
+          {{ article.total_views }} Views
+        </div>
+        <h4 class="ml-2 text-gray-400 text-sm mt-4">
+          {{ $moment(article.created_at).format("LL") }}
+        </h4>
       </div>
 
       <p class="py-4">
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book. It has survived not only five
-        centuries, but also the leap into electronic typesetting, remaining
-        essentially unchanged. It was popularised in the 1960s with the release
-        of Letraset sheets containing Lorem Ipsum passages, and more recently
-        with desktop publishing software like Aldus PageMaker including versions
-        of Lorem Ipsum.
+        {{ article.body }}
       </p>
       <div class="flex justify-between">
         <img
@@ -69,7 +64,7 @@
             alt="Image"
           />
           <div class="ml-2">
-            <h2>Kosal Koeung</h2>
+            <h2>{{ article.author.name }}</h2>
             <small class="text-gray-400 -mt-2">
               Book Publisher at News App</small
             >
@@ -142,25 +137,56 @@
                 </svg>
               </div>
             </div>
-            <div class="justify-end">253 Published</div>
+            <div class="justify-end">
+              {{ article.author.total_published }} Published
+            </div>
           </div>
         </div>
       </div>
       <div class="py-3">
         <h2 class="text-md">Read More</h2>
         <div class="py-2 grid grid-cols-4">
-          <news-card :route="`routes`" v-for="i in 4" :key="i"></news-card>
+          <news-card
+            :article="article"
+            v-for="article in article.read_more"
+            :key="article.id"
+          />
         </div>
       </div>
     </div>
-    <div class="bg-blue-100 col-span-1"></div>
+    <div class="col-span-1">
+      <ul role="list">
+        <li
+          v-for="i in 4"
+          :key="i"
+          class="my-4 first:text-yellow-500 last:line-through last:border-b-0"
+        >
+          <div class="flex items-center bg-blue-100 h-48 rounded-md">
+            <h2 class="mx-auto">Ads Here</h2>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
-import NewsCard from "../../components/NewsCard.vue";
+import { mapActions, mapState } from "vuex";
+
 export default {
-  components: { NewsCard },
+  name: "ArticleDetail",
+  data() {
+    return {};
+  },
+  methods: {
+    ...mapActions("article", ["fetchBySlug"]),
+  },
+  mounted() {
+    this.fetchBySlug(this.$route.params.slug);
+  },
+  computed: {
+    ...mapState("article", ["article"]),
+  },
 };
 </script>
 
